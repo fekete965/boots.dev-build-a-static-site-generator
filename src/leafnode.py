@@ -13,7 +13,7 @@ class LeafNode(HtmlNode):
         if node_props != "":
             node_props = " " + node_props
 
-        if self.tag == "input":
+        if self.tag == "input" or self.tag == "img":
             return f"<{self.tag}{node_props} />"
 
         return f"<{self.tag}{node_props}>{self.value}</{self.tag}>"
