@@ -1,6 +1,6 @@
-from htmlnode import HtmlNode
-from leafnode import LeafNode
-from textnode import TextNode, TextType
+from nodes.htmlnode import HtmlNode
+from nodes.leafnode import LeafNode
+from nodes.textnode import TextNode, TextType
 
 
 def text_node_to_html_node(text_node: TextNode) -> HtmlNode:
