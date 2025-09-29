@@ -1,6 +1,3 @@
-from functools import reduce
-
-
 class HtmlNode:
     def __init__(
         self,
