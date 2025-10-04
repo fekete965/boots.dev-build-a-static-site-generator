@@ -1,6 +1,7 @@
 import unittest
 
-from src.nodes.textnode import TextNode, TextType
+from src.nodes.textnode import TextNode
+from src.nodes.texttype import TextType
 from .split_nodes_image import split_nodes_image
 
 
