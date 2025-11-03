@@ -5,8 +5,30 @@ import re
 
 def split_nodes_code_block(old_nodes: list[TextNode]) -> list[TextNode]:
     """
-    Split text nodes on triple backticks (```) for code blocks.
-    This should be called before split_nodes_delimiter for single backticks.
+    Split text nodes on triple backticks (```) for inline code blocks.
+    
+    Processes text nodes to find triple backtick patterns and converts them
+    to CODE_BLOCK text nodes. This function should be called before
+    split_nodes_delimiter for single backticks to ensure proper precedence.
+    
+    Non-TEXT nodes are passed through unchanged. Only TEXT nodes are processed
+    for triple backtick patterns.
+    
+    Args:
+        old_nodes: List of TextNode objects to process
+        
+    Returns:
+        List of TextNode objects with triple backtick patterns converted to
+        CODE_BLOCK type nodes. Text before and after code blocks remains as
+        TEXT type nodes.
+        
+    Example:
+        Input: [TextNode("This is ```code``` here", TextType.TEXT)]
+        Output: [
+            TextNode("This is ", TextType.TEXT),
+            TextNode("code", TextType.CODE_BLOCK),
+            TextNode(" here", TextType.TEXT)
+        ]
     """
     final_nodes = []
 
@@ -16,8 +38,8 @@ def split_nodes_code_block(old_nodes: list[TextNode]) -> list[TextNode]:
             continue
 
         text = old.text
-        # Find all occurrences of triple backticks
-        pattern = r'```([^`]+)```'
+        # Find all occurrences of triple backticks (including empty code blocks)
+        pattern = r'```([^`]*)```'
         matches = list(re.finditer(pattern, text))
         
         if not matches:
