@@ -1,5 +1,6 @@
 from src.nodes.htmlnode import HtmlNode
 from src.nodes.leafnode import LeafNode
+from src.nodes.parentnode import ParentNode
 from src.nodes.textnode import TextNode
 from src.nodes.texttype import TextType
 
@@ -21,4 +22,4 @@ def text_node_to_html_node(text_node: TextNode) -> HtmlNode:
         case TextType.LINK:
             return LeafNode(tag="a", value=text_node.text, props={"href": text_node.url})
         case TextType.IMAGE:
-            return LeafNode(tag="img", value=text_node.text, props={"src": text_node.url})
+            return LeafNode(tag="img", value=text_node.text, props={"src": text_node.url, "alt": text_node.text})
