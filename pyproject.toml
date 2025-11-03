@@ -5,3 +5,33 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+# Black enforces PEP 8 style:
+# - 2 blank lines between top-level function and class definitions
+# - 1 blank line between inner functions
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | __pycache__
+)/
+'''
+
+[dependency-groups]
+dev = [
+    "black>=25.9.0",
+]
