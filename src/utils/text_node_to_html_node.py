@@ -12,6 +12,10 @@ def text_node_to_html_node(text_node: TextNode) -> HtmlNode:
             return LeafNode(tag="b", value=text_node.text)
         case TextType.CODE:
             return LeafNode(tag="code", value=text_node.text)
+        case TextType.CODE_BLOCK:
+            # Wrap code block in <pre><code>...</code></pre>
+            code_node = LeafNode(tag="code", value=text_node.text)
+            return ParentNode(tag="pre", children=[code_node])
         case TextType.ITALIC:
             return LeafNode(tag="i", value=text_node.text)
         case TextType.LINK:

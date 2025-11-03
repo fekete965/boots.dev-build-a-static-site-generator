@@ -8,7 +8,7 @@ def block_to_block_type(block: str) -> BlockType:
         return BlockType.HEADING
 
     # Checking for code block
-    if block.startswith("```") and block.endswith("```"):
+    if block.startswith("`") and block.endswith("`"):
         return BlockType.CODE
 
     # Checking for unordered list
