@@ -2,11 +2,13 @@ from src.nodes.textnode import TextNode
 from src.nodes.texttype import TextType
 
 
-def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: TextType) -> list[TextNode]:
+def split_nodes_delimiter(
+    old_nodes: list[TextNode], delimiter: str, text_type: TextType
+) -> list[TextNode]:
     final_nodes = []
 
     for old in old_nodes:
-        if (old.type != TextType.TEXT):
+        if old.type != TextType.TEXT:
             final_nodes.append(old)
             continue
 
@@ -33,9 +35,7 @@ def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type: 
                 continue
 
             if i % 2 == 0:
-                final_nodes.append(
-                    TextNode(text=text, type=TextType.TEXT)
-                )
+                final_nodes.append(TextNode(text=text, type=TextType.TEXT))
             else:
                 final_nodes.append(TextNode(text=text, type=text_type))
 

@@ -4,7 +4,7 @@ import re
 
 def block_to_block_type(block: str) -> BlockType:
     # Checking for heading block
-    if re.match(r'#{1,6}\s.+', block):
+    if re.match(r"#{1,6}\s.+", block):
         return BlockType.HEADING
 
     # Checking for code block
@@ -16,7 +16,7 @@ def block_to_block_type(block: str) -> BlockType:
         return BlockType.UNORDERED_LIST
 
     # Checking for ordered list
-    if re.match(r'^[0-9]+\.', block):
+    if re.match(r"^[0-9]+\.", block):
         return BlockType.ORDERED_LIST
 
     # Checking for quote

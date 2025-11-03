@@ -2,7 +2,7 @@ from .htmlnode import HtmlNode
 
 
 class ParentNode(HtmlNode):
-    def __init__(self, tag: str,  children: list["HtmlNode"], props: dict = None):
+    def __init__(self, tag: str, children: list["HtmlNode"], props: dict = None):
         super().__init__(tag=tag, children=children, props=props)
 
     def to_html(self):
@@ -16,8 +16,6 @@ class ParentNode(HtmlNode):
         if node_props != "":
             node_props = " " + node_props
 
-        children_html = "".join(
-            map(lambda child: child.to_html(), self.children)
-        )
+        children_html = "".join(map(lambda child: child.to_html(), self.children))
 
         return f"<{self.tag}{node_props}>{children_html}</{self.tag}>"

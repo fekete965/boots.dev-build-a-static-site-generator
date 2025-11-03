@@ -136,6 +136,5 @@ class TestTextToTextNodes(unittest.TestCase):
         self.assertEqual(nodes[9].url, "https://www.boot.dev")
 
         self.assertEqual(nodes[10].type, TextType.TEXT)
-        self.assertEqual(
-            nodes[10].text, ". These resources are truly amazing!")
+        self.assertEqual(nodes[10].text, ". These resources are truly amazing!")
         self.assertEqual(nodes[10].url, None)

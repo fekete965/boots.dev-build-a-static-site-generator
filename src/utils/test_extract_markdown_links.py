@@ -21,8 +21,5 @@ class TestExtractMarkdownLinks(unittest.TestCase):
 
         self.assertEqual(
             links,
-            [
-                ("Hello, there!", "https://www.boot.dev"),
-                ("Google meh", "https://www.google.com")
-            ]
+            [("Hello, there!", "https://www.boot.dev"), ("Google meh", "https://www.google.com")],
         )

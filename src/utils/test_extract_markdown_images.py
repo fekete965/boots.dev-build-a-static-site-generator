@@ -21,8 +21,5 @@ class TestExtractMarkdownImages(unittest.TestCase):
 
         self.assertEqual(
             images,
-            [
-                ("Hello, there!", "https://www.boot.dev"),
-                ("Google meh", "https://www.google.com")
-            ]
+            [("Hello, there!", "https://www.boot.dev"), ("Google meh", "https://www.google.com")],
         )

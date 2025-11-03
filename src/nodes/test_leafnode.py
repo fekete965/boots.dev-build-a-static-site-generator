@@ -12,10 +12,9 @@ class TestLeafNode(unittest.TestCase):
         node = LeafNode(
             tag="a",
             value="Click me, mortal!",
-            props={"class": "text-2xl font-bold",
-                   "href": "https://www.boot.dev"},
+            props={"class": "text-2xl font-bold", "href": "https://www.boot.dev"},
         )
         self.assertEqual(
             node.to_html(),
-            "<a class=\"text-2xl font-bold\" href=\"https://www.boot.dev\">Click me, mortal!</a>",
+            '<a class="text-2xl font-bold" href="https://www.boot.dev">Click me, mortal!</a>',
         )

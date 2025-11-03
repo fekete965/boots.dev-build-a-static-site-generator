@@ -9,7 +9,7 @@ from .split_nodes_link import split_nodes_link
 def text_to_text_nodes(text: str) -> list[TextNode]:
     """
     Convert a plain text string into a list of TextNode objects with appropriate types.
-    
+
     Processes the text to identify and extract various markdown elements including:
     - Triple backtick code blocks (```code```)
     - Bold text (*text*)
@@ -17,18 +17,18 @@ def text_to_text_nodes(text: str) -> list[TextNode]:
     - Single backtick inline code (`code`)
     - Images (![alt](url))
     - Links ([text](url))
-    
+
     The processing order is important: code blocks are processed first to avoid
     conflicts with single backticks, then bold/italic, then single backticks,
     and finally images and links.
-    
+
     Args:
         text: Plain text string potentially containing markdown syntax
-        
+
     Returns:
         List of TextNode objects with appropriate types based on the markdown
         syntax found in the input text
-        
+
     Example:
         Input: "This is *bold* and ```code```"
         Output: [

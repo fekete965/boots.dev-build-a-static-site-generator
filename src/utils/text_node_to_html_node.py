@@ -8,7 +8,7 @@ from src.nodes.texttype import TextType
 def text_node_to_html_node(text_node: TextNode) -> HtmlNode:
     """
     Convert a TextNode to its corresponding HTML representation.
-    
+
     Maps different TextType values to appropriate HTML nodes:
     - TEXT: Plain text leaf node (no tag)
     - BOLD: <b> tag
@@ -17,19 +17,19 @@ def text_node_to_html_node(text_node: TextNode) -> HtmlNode:
     - CODE_BLOCK: <pre><code>...</code></pre> wrapper
     - LINK: <a> tag with href attribute
     - IMAGE: <img> tag with src and alt attributes
-    
+
     Args:
         text_node: TextNode object to convert
-        
+
     Returns:
         HtmlNode representing the HTML equivalent of the TextNode.
         May be a LeafNode for simple elements or ParentNode for
         complex elements like code blocks.
-        
+
     Example:
         Input: TextNode("example", TextType.BOLD)
         Output: LeafNode(tag="b", value="example")
-        
+
         Input: TextNode("code", TextType.CODE_BLOCK)
         Output: ParentNode(tag="pre", children=[LeafNode(tag="code", value="code")])
     """
@@ -49,4 +49,6 @@ def text_node_to_html_node(text_node: TextNode) -> HtmlNode:
         case TextType.LINK:
             return LeafNode(tag="a", value=text_node.text, props={"href": text_node.url})
         case TextType.IMAGE:
-            return LeafNode(tag="img", value=text_node.text, props={"src": text_node.url, "alt": text_node.text})
+            return LeafNode(
+                tag="img", value=text_node.text, props={"src": text_node.url, "alt": text_node.text}
+            )

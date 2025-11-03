@@ -14,7 +14,7 @@ def split_nodes_image(old_nodes: list[TextNode]) -> list[TextNode]:
         text = node.text
         images = extract_markdown_images(text)
 
-        if (len(images) == 0):
+        if len(images) == 0:
             result.append(node)
             continue
 
@@ -27,19 +27,15 @@ def split_nodes_image(old_nodes: list[TextNode]) -> list[TextNode]:
             index_of_img_text = text.find(full_img_text)
 
             if index_of_img_text == -1:
-                raise Exception(
-                    "Invalid Markdown syntax, image cannot be found"
-                )
+                raise Exception("Invalid Markdown syntax, image cannot be found")
 
             partial_text = text[0:index_of_img_text]
-            text = text[index_of_img_text + len(full_img_text):]
+            text = text[index_of_img_text + len(full_img_text) :]
 
             if partial_text is not None and partial_text != "":
                 result.append(TextNode(text=partial_text, type=TextType.TEXT))
 
-            result.append(
-                TextNode(text=img_text, type=TextType.IMAGE, url=img_url)
-            )
+            result.append(TextNode(text=img_text, type=TextType.IMAGE, url=img_url))
 
         # Add any remaining text after the last image
         if text is not None and text != "":

@@ -41,9 +41,12 @@ They stare at each other for a moment.
 
         self.assertEqual(len(blocks), 4)
 
-        self.assertEqual(blocks, [
-            "# **OBI-WAN**: Hello, there!",
-            "# _GENERAL GRIEVOUS_: General Kenobi, you are a bold one. I find your behavior bewildering . . . Surely you realize you're doomed, (to droids) Kill him!",
-            "## About a HUNDRED BATTLE DROIDS surround OBI-WAN, GENERAL GRIEVOUS, and his BODYGUARDS.\nOBI-WAN looks around, then walks right up to GENERAL GRIEVOUS.\nThey stare at each other for a moment.",
-            "# _GENERAL GRIEVOUS_: Enough of this.",
-        ])
+        self.assertEqual(
+            blocks,
+            [
+                "# **OBI-WAN**: Hello, there!",
+                "# _GENERAL GRIEVOUS_: General Kenobi, you are a bold one. I find your behavior bewildering . . . Surely you realize you're doomed, (to droids) Kill him!",
+                "## About a HUNDRED BATTLE DROIDS surround OBI-WAN, GENERAL GRIEVOUS, and his BODYGUARDS.\nOBI-WAN looks around, then walks right up to GENERAL GRIEVOUS.\nThey stare at each other for a moment.",
+                "# _GENERAL GRIEVOUS_: Enough of this.",
+            ],
+        )

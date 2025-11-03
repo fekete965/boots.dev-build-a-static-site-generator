@@ -18,7 +18,7 @@ class HtmlNode:
         if self.props is None:
             return ""
 
-        return " ".join(map(lambda item: f"{item[0]}=\"{item[1]}\"", self.props.items()))
+        return " ".join(map(lambda item: f'{item[0]}="{item[1]}"', self.props.items()))
 
     def __repr__(self):
         return f"HtmlNode({self.tag}, {self.value}, {self.children}, {self.props})"
