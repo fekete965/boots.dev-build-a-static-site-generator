@@ -12,6 +12,13 @@ DIST_FOLDER_PATH = "public"
 def main():
     move_static_files_to_public()
 
+    # Generate a page from content/index.md using template.html and write it to public/index.html.
+    generate_page(
+        from_path="content/index.md",
+        template_path="template.html",
+        dest_path="public/index.html",
+    )
+
 
 def move_static_files_to_public():
     cwd = os.getcwd()
