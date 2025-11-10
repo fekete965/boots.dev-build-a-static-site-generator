@@ -1,6 +1,9 @@
 import os
 import shutil
 
+from src.utils.extract_title import extract_title
+from src.utils.markdown_to_html_node import markdown_to_html_node
+
 
 STATIC_FOLDER_PATH = "static"
 DIST_FOLDER_PATH = "public"
@@ -63,6 +66,28 @@ def copy_folder(source: str, destination: str):
             print(
                 f"Copying file: {item_source_path} to {item_destination_path}")
             shutil.copyfile(item_source_path, item_destination_path)
+
+
+def generate_page(from_path: str, template_path: str, dest_path: str):
+    print(
+        f"Generating page from {from_path} to {dest_path} using {template_path}")
+
+    markdown_str = ""
+    with open(from_path, "r") as file:
+        markdown_str = file.read()
+
+    template_str = ""
+    with open(template_path, "r") as file:
+        template_str = file.read()
+
+    title = extract_title(markdown_str)
+    html_str = markdown_to_html_node(markdown_str).to_html()
+
+    final_html_str = template_str.replace(
+        "{{ Title }}", title).replace("{{ Content }}", html_str)
+
+    with open(dest_path, 'w') as file:
+        file.write(final_html_str)
 
 
 if __name__ == "__main__":
