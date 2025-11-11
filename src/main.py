@@ -5,29 +5,68 @@ from src.utils.extract_title import extract_title
 from src.utils.markdown_to_html_node import markdown_to_html_node
 
 
-STATIC_FOLDER_PATH = "static"
-DIST_FOLDER_PATH = "public"
+STATIC_FOLDER_NAME = "static"
+DIST_FOLDER_NAME = "public"
+CONTENT_FOLDER_NAME = "content"
+TEMPLATE_FILE_NAME = "template.html"
 
 
 def main():
     move_static_files_to_public()
 
+    cwd = os.getcwd()
+    content_folder_path = os.path.join(cwd, CONTENT_FOLDER_NAME)
+    template_file_path = os.path.join(cwd, TEMPLATE_FILE_NAME)
+    dist_folder_path = os.path.join(cwd, DIST_FOLDER_NAME)
+
     # Generate a page from content/index.md using template.html and write it to public/index.html.
-    generate_page(
-        from_path="content/index.md",
-        template_path="template.html",
-        dest_path="public/index.html",
+    generate_content(
+        folder_path=content_folder_path,
+        template_file_path=template_file_path,
+        dist_folder_path=dist_folder_path,
     )
+
+
+def generate_content(folder_path: str, template_file_path: str, dist_folder_path: str) -> list[str]:
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+
+        # If the item is a directory, generate the content for the directory
+        if os.path.isdir(item_path):
+            # Get the new dist folder path
+            new_dist_folder_path = os.path.join(dist_folder_path, item)
+            # Create the new dist folder if it doesn't exist
+            if not os.path.exists(new_dist_folder_path):
+                os.makedirs(new_dist_folder_path)
+
+            # Continue the recursive call
+            generate_content(
+                folder_path=item_path,
+                template_file_path=template_file_path,
+                dist_folder_path=new_dist_folder_path,
+            )
+        # If the item is an index.md file, generate the page for the item
+        elif item == "index.md":
+            # Get the new dist folder path
+            new_dist_folder_path = os.path.join(
+                dist_folder_path, item.replace(".md", ".html"))
+
+            # Generate the page for the item
+            generate_page(
+                from_path=item_path,
+                template_path=template_file_path,
+                dest_path=new_dist_folder_path,
+            )
 
 
 def move_static_files_to_public():
     cwd = os.getcwd()
 
-    static_folder_path = os.path.join(cwd, STATIC_FOLDER_PATH)
+    static_folder_path = os.path.join(cwd, STATIC_FOLDER_NAME)
     if not os.path.exists(static_folder_path):
         raise Exception(f"Static folder {static_folder_path} does not exist")
 
-    dist_folder_path = os.path.join(cwd, DIST_FOLDER_PATH)
+    dist_folder_path = os.path.join(cwd, DIST_FOLDER_NAME)
 
     # Clean up the dist folder
     delete_folder(dist_folder_path)
@@ -77,7 +116,7 @@ def copy_folder(source: str, destination: str):
 
 def generate_page(from_path: str, template_path: str, dest_path: str):
     print(
-        f"Generating page from {from_path} to {dest_path} using {template_path}")
+        f"\nGenerating page from {from_path} to {dest_path} using {template_path}")
 
     markdown_str = ""
     with open(from_path, "r") as file:
