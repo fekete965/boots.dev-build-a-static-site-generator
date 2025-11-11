@@ -7,6 +7,9 @@ A Python-based static site generator that converts Markdown to HTML using a cust
 - Converts Markdown syntax to HTML nodes
 - Supports headings, paragraphs, lists, blockquotes, and code blocks
 - Handles inline markdown (bold, italic, links, images, code)
+- Recursively processes content folders to generate multiple pages
+- Copies static assets (CSS, images, etc.) to the output directory
+- Starts a local development server for preview
 - Comprehensive test coverage
 - Code formatting with Black
 
@@ -32,21 +35,44 @@ uv sync
 
 Run the main script:
 ```bash
-PYTHONPATH=src uv run python src/main.py
+PYTHONPATH=. uv run python src/main.py
 ```
 
-Or use the provided script:
+Or use the provided script (which also starts a local server on port 8888):
 ```bash
 ./main.sh
 ```
 
+The script will:
+1. Copy all files from the `static/` folder to `public/`
+2. Recursively process all `index.md` files in the `content/` folder
+3. Generate HTML pages using `template.html`
+4. Start a local HTTP server at `http://localhost:8888` (if using `main.sh`)
+
+### Content Structure
+
+Place your Markdown files in the `content/` folder:
+- `content/index.md` → `public/index.html`
+- `content/contact/index.md` → `public/contact/index.html`
+- `content/about/index.md` → `public/about/index.html`
+- etc.
+
+Each `index.md` file should start with a heading (`# Title`) which will be used as the page title.
+
 ## Project Structure
 
 ```
-src/
-├── nodes/           # Core node classes (HTMLNode, LeafNode, ParentNode, TextNode)
-├── utils/           # Markdown parsing and conversion utilities
-└── main.py          # Main entry point
+.
+├── content/         # Markdown source files (organized in folders)
+│   └── index.md     # Main page content
+├── static/          # Static assets (CSS, images, etc.)
+├── public/          # Generated HTML output (created by the script)
+├── template.html    # HTML template with {{ Title }} and {{ Content }} placeholders
+├── src/
+│   ├── nodes/       # Core node classes (HTMLNode, LeafNode, ParentNode, TextNode)
+│   ├── utils/       # Markdown parsing and conversion utilities
+│   └── main.py      # Main entry point
+└── main.sh          # Build script (generates site and starts server)
 ```
 
 ### Key Components
