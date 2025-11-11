@@ -169,7 +169,7 @@ def unordered_list_to_html_node(unordered_list: str) -> HtmlNode:
 
         if item.startswith("* ") or item.startswith("- ") or item.startswith("+ "):
             item_text = item[2:].strip()
-        elif item.startswith("*") or item.startswith("-") or item.startswith("+"):
+        elif (item.startswith("*") and item[1] != "*") or (item.startswith("-") and item[1] != "-") or (item.startswith("+") and item[1] != "+"):
             item_text = item[1:].strip()
 
         children = text_to_children(item_text)
