@@ -12,8 +12,11 @@ TEMPLATE_FILE_NAME = "template.html"
 
 
 def main():
-    move_static_files_to_public()
 
+    # Move the static files to the dist folder
+    move_static_files_to_dist()
+
+    # Define the paths for the content folder, template file, and dist folder
     cwd = os.getcwd()
     content_folder_path = os.path.join(cwd, CONTENT_FOLDER_NAME)
     template_file_path = os.path.join(cwd, TEMPLATE_FILE_NAME)
@@ -59,7 +62,7 @@ def generate_content(folder_path: str, template_file_path: str, dist_folder_path
             )
 
 
-def move_static_files_to_public():
+def move_static_files_to_dist():
     cwd = os.getcwd()
 
     static_folder_path = os.path.join(cwd, STATIC_FOLDER_NAME)
