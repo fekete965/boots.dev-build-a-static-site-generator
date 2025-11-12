@@ -6,7 +6,7 @@ from src.utils.markdown_to_html_node import markdown_to_html_node
 
 
 STATIC_FOLDER_NAME = "static"
-DIST_FOLDER_NAME = "public"
+DIST_FOLDER_NAME = "docs"
 CONTENT_FOLDER_NAME = "content"
 TEMPLATE_FILE_NAME = "template.html"
 
