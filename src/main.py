@@ -65,6 +65,7 @@ def generate_pages_recursive(base_path: str, folder_path: str, template_file_pat
 
             # Generate the page for the item
             generate_page(
+                base_path=base_path,
                 from_path=item_path,
                 template_path=template_file_path,
                 dest_path=new_dist_folder_path,
@@ -126,7 +127,7 @@ def copy_folder(source: str, destination: str):
             shutil.copyfile(item_source_path, item_destination_path)
 
 
-def generate_page(from_path: str, template_path: str, dest_path: str):
+def generate_page(base_path: str, from_path: str, template_path: str, dest_path: str):
     print(
         f"\nGenerating page from {from_path} to {dest_path} using {template_path}")
 
