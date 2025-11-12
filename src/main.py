@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from src.utils.extract_title import extract_title
 from src.utils.markdown_to_html_node import markdown_to_html_node
@@ -12,6 +13,12 @@ TEMPLATE_FILE_NAME = "template.html"
 
 
 def main():
+    # Get the base path from the command line arguments
+    base_path = sys.argv[1]
+
+    # If the base path is not provided, default to "/"
+    if not base_path:
+        base_path = "/"
 
     # Move the static files to the dist folder
     move_static_files_to_dist()
