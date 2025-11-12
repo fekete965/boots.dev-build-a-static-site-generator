@@ -142,8 +142,11 @@ def generate_page(base_path: str, from_path: str, template_path: str, dest_path:
     title = extract_title(markdown_str)
     html_str = markdown_to_html_node(markdown_str).to_html()
 
-    final_html_str = template_str.replace(
-        "{{ Title }}", title).replace("{{ Content }}", html_str)
+    final_html_str = template_str\
+        .replace("{{ Title }}", title)\
+        .replace("{{ Content }}", html_str)\
+        .replace("href=\"/", f"href=\"{base_path}")\
+        .replace("src=\"/", f"src=\"{base_path}")
 
     with open(dest_path, 'w') as file:
         file.write(final_html_str)
