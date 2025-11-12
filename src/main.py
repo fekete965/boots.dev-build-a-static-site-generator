@@ -29,15 +29,16 @@ def main():
     template_file_path = os.path.join(cwd, TEMPLATE_FILE_NAME)
     dist_folder_path = os.path.join(cwd, DIST_FOLDER_NAME)
 
-    # Generate a page from content/index.md using template.html and write it to public/index.html.
-    generate_content(
+    # Generate the content for the content folder
+    generate_pages_recursive(
+        base_path=base_path,
         folder_path=content_folder_path,
         template_file_path=template_file_path,
         dist_folder_path=dist_folder_path,
     )
 
 
-def generate_content(folder_path: str, template_file_path: str, dist_folder_path: str) -> list[str]:
+def generate_pages_recursive(base_path: str, folder_path: str, template_file_path: str, dist_folder_path: str) -> list[str]:
     for item in os.listdir(folder_path):
         item_path = os.path.join(folder_path, item)
 
@@ -50,7 +51,8 @@ def generate_content(folder_path: str, template_file_path: str, dist_folder_path
                 os.makedirs(new_dist_folder_path)
 
             # Continue the recursive call
-            generate_content(
+            generate_pages_recursive(
+                base_path=base_path,
                 folder_path=item_path,
                 template_file_path=template_file_path,
                 dist_folder_path=new_dist_folder_path,
